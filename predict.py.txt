@@ -1,0 +1,35 @@
+import joblib
+import pandas as pd
+
+# تحميل النموذج
+model = joblib.load("aircraft_model.pkl")
+
+# مثال بيانات جديدة للتجربة
+new_data = pd.DataFrame([{
+    "Model": "C172",
+    "Company": "Cessna",
+    "Engine_Type": "Piston",
+    "HP_or_lbs_thr_ea_engine": 180,
+    "Rcmnd_cruise_Knots": 120,
+    "Stall_Knots_dirty": 55,
+    "Fuel_gal_lbs": 56,
+    "All_eng_service_ceiling": 14000,
+    "Eng_out_service_ceiling": 0,
+    "All_eng_rate_of_climb": 730,
+    "Eng_out_rate_of_climb": 0,
+    "Takeoff_over_50ft": 1630,
+    "Takeoff_ground_run": 960,
+    "Landing_over_50ft": 1350,
+    "Landing_ground_roll": 575,
+    "Gross_weight_lbs": 2450,
+    "Empty_weight_lbs": 1500,
+    "Length_ft_in": 27.0,
+    "Height_ft_in": 8.9,
+    "Wing_span_ft_in": 36.0,
+    "Range_NM1": 640
+}])
+
+# التنبؤ
+prediction = model.predict(new_data)[0]
+
+print("Predicted Max Speed (Knots):", prediction)
